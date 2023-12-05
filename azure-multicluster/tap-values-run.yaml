@@ -1,0 +1,102 @@
+profile: run
+
+ceip_policy_disclosed: true
+
+shared:
+  ingress_domain: run.20-249-58-38.puyopuyooceanviewpro.com
+  activateAppLiveViewSecureAccessControl: false
+  ingress_issuer: ""
+
+contour:
+  infrastructure_provider: azure
+  contour:
+    configFileContents:
+      accesslog-format: json  
+  envoy:
+    service:
+      type: LoadBalancer
+      loadBalancerIP: 20.249.58.38      
+      annotations:
+        service.beta.kubernetes.io/azure-load-balancer-resource-group: northernlight-run
+
+cnrs:
+  domain_template: "{{.Name}}-{{.Namespace}}.{{.Domain}}"
+  default_tls_secret: tanzu-system-ingress/tap-default-tls
+
+appliveview_connector:
+  backend:
+    ingressEnabled: true
+    sslDeactivated: false
+    host: appliveview.view.20-249-58-222.puyopuyooceanviewpro.com
+    caCertData: |-
+      -----BEGIN CERTIFICATE-----
+      MIIDHjCCAgagAwIBAgIQVwijQSwP+XxbaplHTbU3mTANBgkqhkiG9w0BAQsFADAp
+      MScwJQYDVQQDEx50YXAtaW5ncmVzcy1zZWxmc2lnbmVkLXJvb3QtY2EwHhcNMjMx
+      MTE4MDc1MzUxWhcNMjQwMjE2MDc1MzUxWjApMScwJQYDVQQDEx50YXAtaW5ncmVz
+      cy1zZWxmc2lnbmVkLXJvb3QtY2EwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK
+      AoIBAQCzSXWAfyFvrnHRCS13XmHBOLlV3vjuKRYoncrZNTzFL3yFZkymKCkTl0xv
+      ffkuOriIpaASp1TgvrPYKDEbRNr/j6VKgBbXR7RAm/hfaBEOshziS26oXk8mugKy
+      XD9Bd1cAUpSaQMlLRWeTYfqtEoHy8xSeXwzvoXS/C9tllVJdYL05OYUcjybJKfK/
+      Zph2lzadohNzXxd0FxPzGCRDnUA406V332SwGGwPJIhwdMpzV4sHPldF5+kExMwO
+      PbL2agIZPdT06UiGYH4bC07zi6EDPihtg/nAldVjZAropD+SIglwketyIK0UqQSK
+      MuVdr+gmStB+1w/PWqbP9ZTv6lpNAgMBAAGjQjBAMA4GA1UdDwEB/wQEAwICpDAP
+      BgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTar6wsn+CGztTSaoCSLHMACUVizzAN
+      BgkqhkiG9w0BAQsFAAOCAQEArl1tjaMyHqRDlkcFrJi6hDNtZZJUjpAlE8ykVlcc
+      asH1QxbiHCbR2U2w8/rnQAv6xUZ0kGltv50KBMbiNpT3YBHviV3YF3o83jnp0WhL
+      HL7aJLh5O5KT3OVoTYq0ScQiRYuIBEpzHv45kg2r8aadr9Q8wMV5H4K9OXQ1LNtc
+      r9Hkf8psE5dMW2RIla1NoF4rbuM8pCHJWSgeZfMj7C9+9uOuxwE0tkHBPysG2pnC
+      pDHoZYmgplL/vud77qj7+T5vXAGisCqcOG7quohlMK3At8wZ2o4DT9VBpWRdW/6f
+      qlT1zCR6kmflold3XxK1pKLpvqr1RONHlTtmOdqH8Flqbg==
+      -----END CERTIFICATE------
+
+amr:
+  observer:
+    auth:
+      kubernetes_service_accounts:
+        enable: true
+    cloudevent_handler:
+      endpoint: https://amr-cloudevent-handler.view.20-249-58-222.puyopuyooceanviewpro.com
+    ca_cert_data: |
+      -----BEGIN CERTIFICATE----- 
+      MIIDHjCCAgagAwIBAgIQVwijQSwP+XxbaplHTbU3mTANBgkqhkiG9w0BAQsFADAp 
+      MScwJQYDVQQDEx50YXAtaW5ncmVzcy1zZWxmc2lnbmVkLXJvb3QtY2EwHhcNMjMx 
+      MTE4MDc1MzUxWhcNMjQwMjE2MDc1MzUxWjApMScwJQYDVQQDEx50YXAtaW5ncmVz 
+      cy1zZWxmc2lnbmVkLXJvb3QtY2EwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK 
+      AoIBAQCzSXWAfyFvrnHRCS13XmHBOLlV3vjuKRYoncrZNTzFL3yFZkymKCkTl0xv 
+      ffkuOriIpaASp1TgvrPYKDEbRNr/j6VKgBbXR7RAm/hfaBEOshziS26oXk8mugKy 
+      XD9Bd1cAUpSaQMlLRWeTYfqtEoHy8xSeXwzvoXS/C9tllVJdYL05OYUcjybJKfK/ 
+      Zph2lzadohNzXxd0FxPzGCRDnUA406V332SwGGwPJIhwdMpzV4sHPldF5+kExMwO 
+      PbL2agIZPdT06UiGYH4bC07zi6EDPihtg/nAldVjZAropD+SIglwketyIK0UqQSK 
+      MuVdr+gmStB+1w/PWqbP9ZTv6lpNAgMBAAGjQjBAMA4GA1UdDwEB/wQEAwICpDAP 
+      BgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTar6wsn+CGztTSaoCSLHMACUVizzAN 
+      BgkqhkiG9w0BAQsFAAOCAQEArl1tjaMyHqRDlkcFrJi6hDNtZZJUjpAlE8ykVlcc 
+      asH1QxbiHCbR2U2w8/rnQAv6xUZ0kGltv50KBMbiNpT3YBHviV3YF3o83jnp0WhL 
+      HL7aJLh5O5KT3OVoTYq0ScQiRYuIBEpzHv45kg2r8aadr9Q8wMV5H4K9OXQ1LNtc 
+      r9Hkf8psE5dMW2RIla1NoF4rbuM8pCHJWSgeZfMj7C9+9uOuxwE0tkHBPysG2pnC 
+      pDHoZYmgplL/vud77qj7+T5vXAGisCqcOG7quohlMK3At8wZ2o4DT9VBpWRdW/6f 
+      qlT1zCR6kmflold3XxK1pKLpvqr1RONHlTtmOdqH8Flqbg== 
+      -----END CERTIFICATE-----
+
+api_auto_registration:
+  tap_gui_url: https://tap-gui.view.20-249-58-222.puyopuyooceanviewpro.com
+  cluster_name: run
+
+accelerator:
+  ingress:
+    include: true    
+    enable_tls: true  
+  tls:
+    secret_name: tap-default-tls
+    namespace: tanzu-system-ingress
+
+package_overlays:
+- name: contour
+  secrets:
+  - name: contour-default-tls
+- name: cnrs
+  secrets:
+  - name: cnrs-https
+
+excluded_packages:
+- image-policy-webhook.signing.apps.tanzu.vmware.com
+- eventing.tanzu.vmware.com

@@ -1,0 +1,91 @@
+profile: build
+ceip_policy_disclosed: true
+
+shared:
+  image_registry:
+    project_path: "northernlight0808new.azurecr.io/tanzu-application-platform"
+    secret:
+      name: repository-secret
+      namespace: tap-install
+  ca_cert_data: |
+    -----BEGIN CERTIFICATE-----
+    MIIDQTCCAimgAwIBAgIUbReTzElGl6M6i2dDJbuXDHA6SwUwDQYJKoZIhvcNAQEL
+    BQAwMDETMBEGA1UEAwwKZGVmYXVsdC1jYTEMMAoGA1UECgwDVEFQMQswCQYDVQQG
+    EwJKUDAeFw0yMzA5MTkwNzM1MTVaFw0zMzA5MTYwNzM1MTVaMDAxEzARBgNVBAMM
+    CmRlZmF1bHQtY2ExDDAKBgNVBAoMA1RBUDELMAkGA1UEBhMCSlAwggEiMA0GCSqG
+    SIb3DQEBAQUAA4IBDwAwggEKAoIBAQDGadGYcyo77a6rWfKoa0Ne+NVMtH4ieFmd
+    YxmUQKaT03Cs+kIj4uusb6G2aYGMAZ1EKh4gbm/ozlDMrfitPa0PMXvVL/b4/XBQ
+    +u0TgVtzEntmihPQa9YtjdXF58sD1CvGs38X9GqNXGetFY6BXeUior6iAeqB9DcB
+    rTokCYftnVXwBqEMotfZ/rMeoa9uNUrUj3xcerIFnzZot6f8bPNKGfmG6nm6DeOl
+    /t7KXO5xsR9fjkyGxhK8i74oyuZ6rp0E2jG9eqcxnXERTOWbMJJFXyIhMN74t4L5
+    oaZQbMyuO2ucyRjsKDOJcSBeDhUu2MsZgrR26EnCvGXMxrk4truLAgMBAAGjUzBR
+    MB0GA1UdDgQWBBSxIBOP9pBYZa8bP78Rck8acIRypjAfBgNVHSMEGDAWgBSxIBOP
+    9pBYZa8bP78Rck8acIRypjAPBgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3DQEBCwUA
+    A4IBAQB+oAd6Ljrh3n+/x83qBpb5i5IWdmWPRuhtrdx4Gu2dUYpUGmZu53yvaBr9
+    N6+GOEAApOReoT334znkDkmW+B/pYak8s7Jv+QfOs1LaXktDdIIonuiyU6CrsJh+
+    kBrzXdB56COyqE/RFFL6l6vlq76+3gIPFeJlFMGlUosexiRSc51clpxMMwhnSgW3
+    +d7ecwSBMWrmc3PDZ2Itmiw6xhAWgeo6+WEH7xEhN5h1GrJrzaO3D7b2OZJLGyp6
+    caFlZLECMjJBBhDny7RBwOnKus1+NnUpwq5L5d+4PFzZkFh5F2jITP60CWCwIqzD
+    +d7ARNH63fgoQ3dq0clbcWbvfO/h
+    -----END CERTIFICATE-----
+
+
+buildservice: 
+  exclude_dependencies: true
+
+supply_chain: testing_scanning
+
+amr:
+  observer:
+    auth:
+      kubernetes_service_accounts:
+        enable: true
+    cloudevent_handler:
+      endpoint: https://amr-cloudevent-handler.view.20-249-58-222.puyopuyooceanviewpro.com
+    ca_cert_data: |
+      -----BEGIN CERTIFICATE----- 
+      MIIDHjCCAgagAwIBAgIQVwijQSwP+XxbaplHTbU3mTANBgkqhkiG9w0BAQsFADAp 
+      MScwJQYDVQQDEx50YXAtaW5ncmVzcy1zZWxmc2lnbmVkLXJvb3QtY2EwHhcNMjMx 
+      MTE4MDc1MzUxWhcNMjQwMjE2MDc1MzUxWjApMScwJQYDVQQDEx50YXAtaW5ncmVz 
+      cy1zZWxmc2lnbmVkLXJvb3QtY2EwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK 
+      AoIBAQCzSXWAfyFvrnHRCS13XmHBOLlV3vjuKRYoncrZNTzFL3yFZkymKCkTl0xv 
+      ffkuOriIpaASp1TgvrPYKDEbRNr/j6VKgBbXR7RAm/hfaBEOshziS26oXk8mugKy 
+      XD9Bd1cAUpSaQMlLRWeTYfqtEoHy8xSeXwzvoXS/C9tllVJdYL05OYUcjybJKfK/ 
+      Zph2lzadohNzXxd0FxPzGCRDnUA406V332SwGGwPJIhwdMpzV4sHPldF5+kExMwO 
+      PbL2agIZPdT06UiGYH4bC07zi6EDPihtg/nAldVjZAropD+SIglwketyIK0UqQSK 
+      MuVdr+gmStB+1w/PWqbP9ZTv6lpNAgMBAAGjQjBAMA4GA1UdDwEB/wQEAwICpDAP 
+      BgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTar6wsn+CGztTSaoCSLHMACUVizzAN 
+      BgkqhkiG9w0BAQsFAAOCAQEArl1tjaMyHqRDlkcFrJi6hDNtZZJUjpAlE8ykVlcc 
+      asH1QxbiHCbR2U2w8/rnQAv6xUZ0kGltv50KBMbiNpT3YBHviV3YF3o83jnp0WhL 
+      HL7aJLh5O5KT3OVoTYq0ScQiRYuIBEpzHv45kg2r8aadr9Q8wMV5H4K9OXQ1LNtc 
+      r9Hkf8psE5dMW2RIla1NoF4rbuM8pCHJWSgeZfMj7C9+9uOuxwE0tkHBPysG2pnC 
+      pDHoZYmgplL/vud77qj7+T5vXAGisCqcOG7quohlMK3At8wZ2o4DT9VBpWRdW/6f 
+      qlT1zCR6kmflold3XxK1pKLpvqr1RONHlTtmOdqH8Flqbg== 
+      -----END CERTIFICATE-----
+
+namespace_provisioner:
+  controller: false
+  gitops_install:
+    ref: origin/main
+    subPath: ns-provisioner-samples/gitops-install
+    url: https://github.com/vmware-tanzu/application-accelerator-samples.git
+  additional_sources:
+  - git:
+      ref: origin/main
+      subPath: ns-provisioner-samples/testing-scanning-supplychain
+      url: https://github.com/vmware-tanzu/application-accelerator-samples.git
+      # secretRef section is only needed if connecting to a Private Git repo
+      secretRef:
+        name: git-basic
+        namespace: tap-install
+        create_export: true
+    path: _ytt_lib/testing-scanning-supplychain-setup
+
+package_overlays:
+- name: ootb-supply-chain-testing-scanning
+  secrets:
+  - name: metadata-store-secrets
+
+excluded_packages:
+- grype.scanning.apps.tanzu.vmware.com
+- contour.tanzu.vmware.com
